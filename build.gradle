@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'az.ingress'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final' // Replace with the latest version
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation "junit:junit:$junitVersion"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.7.0'
+
+
+    testImplementation group: 'org.testcontainers', name: 'mysql', version: '1.17.6'
+    testImplementation group: 'org.testcontainers', name: 'junit-jupiter', version: '1.17.6'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
