@@ -3,6 +3,7 @@ package az.ingress.mapstruct.controller;
 import az.ingress.mapstruct.dto.request.UserRequest;
 import az.ingress.mapstruct.dto.response.UserResponse;
 import az.ingress.mapstruct.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public UserResponse create(@RequestBody UserRequest request) {
+    public UserResponse create(@Valid @RequestBody UserRequest request) {
         return userService.create(request);
     }
 
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResponse deleteUserById(@PathVariable Long id, @RequestBody UserRequest request) {
+    public UserResponse deleteUserById(@PathVariable Long id, @Valid @RequestBody UserRequest request) {
         return userService.updateUser(id, request);
     }
 }

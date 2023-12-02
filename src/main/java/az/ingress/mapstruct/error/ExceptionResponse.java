@@ -1,10 +1,19 @@
 package az.ingress.mapstruct.error;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
-@Data
+import java.util.Map;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class ExceptionResponse {
-    public String message;
+    private String title;
+    private String status;
+    private Map<String, String> validationErrors;
+
 }
